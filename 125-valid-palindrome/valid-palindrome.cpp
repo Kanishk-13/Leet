@@ -10,9 +10,19 @@ public:
         for(char &c : s) c = tolower(c);
         int n = s.length();
         string str = s;
-        for(int i = 0; i<s.length()/2; i++){
-            swap(s[i], s[n-i-1]);
+        int left = 0;
+        int right = n-1;
+        // for(int i = 0; i<s.length()/2; i++){
+        //     swap(s[i], s[n-i-1]);
+        // }
+        while (left < right) {
+            if (s[left] != s[right]) {
+                return false;
+            }
+            left++;
+            right--;
         }
-        return str == s;
+        return true;
+        // return string == s;
     }
 };
