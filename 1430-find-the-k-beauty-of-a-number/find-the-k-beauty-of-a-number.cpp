@@ -1,21 +1,16 @@
 class Solution {
 public:
-    int divisorSubstrings(int n, int k) {
-        string win="";
-        string num=to_string(n);
-        int x=num.size();
-        int cnt=0;
-        for(int i=0;i<k;i++){
-            win+=num[i];
+    int divisorSubstrings(int num, int k) {
+        int res = 0, cur = 0, pow = 1;
+        for (int n = num; n > 0; n /= 10) {
+            cur += (n % 10) * pow;
+            if (--k > 0)
+                pow *= 10;
+            else {
+                res += cur && !(num % cur);
+                cur /= 10;
+            }
         }
-        if(n%stoi(win)==0) cnt++;
-        for(int i=k;i<x;i++){
-            win=win.substr(1,win.length()-1);
-            win+=num[i];
-            if(stoi(win)==0) continue;
-            if(n%stoi(win)==0) cnt++;
-        }
-        return cnt;
-        
+        return res;
     }
 };
